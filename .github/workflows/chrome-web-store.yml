@@ -1,8 +1,12 @@
 name: Chrome Web Store release
 
 on:
-  release:
-    types: [published]
+  workflow_call:
+    inputs:
+      tag:
+        description: Existing release tag, for example v2.0.15
+        required: true
+        type: string
   workflow_dispatch:
     inputs:
       tag:
@@ -26,7 +30,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REQUESTED_TAG: ${{ inputs.tag }}
         run: |
-          tag="${REQUESTED_TAG:-${{ github.event.release.tag_name }}}"
+          tag="$REQUESTED_TAG"
           [[ "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
           mkdir release
           gh release download "$tag" --pattern '*-store.zip' --dir release

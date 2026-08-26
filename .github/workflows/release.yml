@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   release:
@@ -26,3 +27,12 @@ jobs:
         with:
           generate_release_notes: true
           files: dist/*.zip
+
+  chrome-web-store:
+    needs: release
+    uses: ./.github/workflows/chrome-web-store.yml
+    with:
+      tag: ${{ github.ref_name }}
+    permissions:
+      contents: read
+      id-token: write

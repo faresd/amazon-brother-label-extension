@@ -1,6 +1,6 @@
 # Chrome Web Store automation
 
-Tagged releases build two deterministic ZIP files and publish a GitHub Release. The Store workflow uploads the Store ZIP with Chrome Web Store API v2 and can submit it for review.
+Tagged releases build two deterministic ZIP files and publish a GitHub Release. The release workflow then calls the reusable Store workflow directly, avoiding GitHub's suppression of follow-up events created with `GITHUB_TOKEN`. The Store workflow uploads the Store ZIP with Chrome Web Store API v2 and can submit it for review.
 
 ## One-time Google/Chrome setup
 
