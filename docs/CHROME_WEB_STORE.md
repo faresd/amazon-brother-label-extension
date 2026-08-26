@@ -21,6 +21,11 @@ Tagged releases build two deterministic ZIP files and publish a GitHub Release. 
 
 No long-lived Google key, OAuth client secret, or refresh token is stored in the repository. Protect the `production` GitHub environment and require reviewer approval if desired.
 
+Before the first Store item exists, keep `CWS_UPLOAD_ENABLED=false` and run the
+workflow manually with `auth_only=true`. This verifies the keyless Google trust
+without uploading the package to another item. After Google assigns the new
+item ID, set `CWS_EXTENSION_ID` and enable uploads.
+
 ## Release
 
 Update `manifest.json` and `package.json` to the same version, merge to `main`, and push a matching tag such as `v2.0.15`. CI validates and packages the extension; the release workflow creates GitHub artifacts; the Store workflow uses the immutable release ZIP.
