@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Package label settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1>Package label settings</h1>
+    <p>These settings stay on this computer. Customer delivery data is never stored.</p>
+    <form id="settings">
+      <label for="qrText">Default QR sender details</label>
+      <textarea id="qrText" placeholder="Text encoded in the QR code"></textarea>
+      <label for="channel">Default channel mark</label>
+      <input id="channel" placeholder="ch dcs">
+      <label for="templatePath">P-touch automatic-length template</label>
+      <input id="templatePath" spellcheck="false">
+      <label for="printerName">Brother printer name</label>
+      <input id="printerName" spellcheck="false">
+      <button type="submit">Save settings</button>
+      <span id="status" role="status"></span>
+    </form>
+    <section>
+      <h2>Brother QL-700 print setup</h2>
+      <ol>
+        <li>Install the Brother b-PAC Client Component and Brother b-PAC browser extension.</li>
+        <li>Keep the <strong>62 mm continuous roll</strong> loaded in the QL-700.</li>
+        <li>The P-touch template controls Automatic Length, so no browser print-preview size is needed.</li>
+      </ol>
+    </section>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Amazon Brother Package Label",
+  "version": "2.0.15",
+  "description": "Prints a content-length 62 mm package label from Amazon Seller Central through Brother b-PAC.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://sellercentral.amazon.fr/orders-v3/order/*"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_title": "Package label settings"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["bpac-sdk.js"],
+      "matches": ["https://sellercentral.amazon.fr/*"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://sellercentral.amazon.fr/*"],
+      "js": ["parser.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

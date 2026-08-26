@@ -1,0 +1,221 @@
+:root {
+  --page-length: 90mm;
+  --destination-length: 70.3mm;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: #eceff1;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+#print-viewport { display: contents; }
+
+.toolbar {
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #c7c7c7;
+  display: flex;
+  gap: 12px;
+  padding: 12px 18px;
+}
+.toolbar span { color: #555; flex: 1; }
+.toolbar button { border: 1px solid #888; border-radius: 16px; cursor: pointer; padding: 7px 15px; }
+#print-again { background: #ffd814; border-color: #fcd200; font-weight: 700; }
+
+#label {
+  background: #fff;
+  height: 62mm;
+  margin: 24px auto;
+  overflow: hidden;
+  position: relative;
+  width: var(--page-length);
+}
+
+.frame {
+  border: 0;
+  height: 58.9mm;
+  left: 3mm;
+  position: absolute;
+  top: 1.5mm;
+  width: calc(var(--page-length) - 3.9mm);
+}
+
+.vertical {
+  position: absolute;
+  transform: rotate(-90deg);
+  transform-origin: top left;
+  white-space: nowrap;
+}
+
+.sender-title {
+  font-family: Arial, sans-serif;
+  font-size: 5mm;
+  font-weight: 400;
+  left: 5.5mm;
+  top: 25mm;
+}
+
+.logo {
+  height: 29.6mm;
+  left: 13.4mm;
+  object-fit: contain;
+  position: absolute;
+  top: 1.55mm;
+  width: 29.6mm;
+}
+
+.date {
+  font-size: 3.55mm;
+  font-weight: 700;
+  left: 41.6mm;
+  position: absolute;
+  top: 26.5mm;
+  transform: rotate(-90deg);
+  transform-origin: top left;
+  white-space: nowrap;
+}
+
+.qr-help {
+  font-size: 2.75mm;
+  left: 53.3mm;
+  line-height: 1.1;
+  top: 27.2mm;
+}
+
+.qr {
+  height: 16mm;
+  left: 60.5mm;
+  position: absolute;
+  top: 6.9mm;
+  width: 16mm;
+}
+.qr img, .qr table, .qr svg { display: block; height: 100% !important; width: 100% !important; }
+
+.channel {
+  font-size: 2.5mm;
+  font-weight: 700;
+  left: 56.5mm;
+  line-height: 1.15;
+  position: absolute;
+  text-align: center;
+  top: 25.8mm;
+  white-space: pre-line;
+  width: 24mm;
+}
+
+.destination-title {
+  font-size: 5.2mm;
+  left: 5.5mm;
+  top: 58.3mm;
+}
+
+.destination {
+  font-size: 3.5mm;
+  left: 16.2mm;
+  line-height: 1.2;
+  max-height: 27.4mm;
+  overflow: hidden;
+  position: absolute;
+  top: 30.5mm;
+  white-space: pre-line;
+  width: var(--destination-length);
+}
+
+.error { color: #b12704; margin: 20px auto; max-width: 680px; }
+
+@media print {
+  @page {
+    margin: 0;
+    size: 62mm 90mm;
+  }
+  html, body {
+    background: #fff;
+    height: var(--page-length);
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 62mm;
+  }
+  .toolbar, .error { display: none !important; }
+  #print-viewport {
+    display: block;
+    height: var(--page-length);
+    left: 0;
+    overflow: hidden;
+    page-break-inside: avoid;
+    position: absolute;
+    top: 0;
+    width: 62mm;
+  }
+  #label {
+    break-inside: avoid;
+    height: var(--page-length);
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    transform: none;
+    width: 62mm;
+  }
+  .frame { display: none; }
+  .destination-title {
+    font-size: 5.2mm;
+    left: 2mm;
+    top: 2mm;
+    transform: none;
+  }
+  .sender-title {
+    font-size: 5mm;
+    left: 31mm;
+    top: 2mm;
+    transform: none;
+  }
+  .destination {
+    height: 27.4mm;
+    left: 31.5mm;
+    max-height: 27.4mm;
+    top: 16.2mm;
+    transform: rotate(90deg);
+    transform-origin: top left;
+    width: var(--destination-length);
+  }
+  .logo {
+    height: 29.6mm;
+    left: 30.85mm;
+    top: 13.4mm;
+    width: 29.6mm;
+  }
+  .date {
+    font-size: 3.55mm;
+    left: 34mm;
+    top: 43.4mm;
+    transform: none;
+  }
+  .qr-help {
+    font-size: 2.75mm;
+    left: 32mm;
+    line-height: 1.1;
+    top: 49mm;
+    transform: none;
+  }
+  .qr {
+    height: 16mm;
+    left: 39.1mm;
+    top: 60.5mm;
+    width: 16mm;
+  }
+  .channel {
+    font-size: 2.5mm;
+    left: 36.2mm;
+    line-height: 1.15;
+    text-align: center;
+    top: 56.5mm;
+    transform: rotate(90deg);
+    transform-origin: top left;
+    width: 24mm;
+  }
+}

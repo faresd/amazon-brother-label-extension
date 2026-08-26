@@ -1,0 +1,15 @@
+{
+  "name": "amazon-brother-package-label",
+  "version": "2.0.15",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node scripts/validate.mjs",
+    "test": "node --test tests/*.test.mjs && npm run check",
+    "build": "node scripts/package.mjs",
+    "release": "npm test && npm run build"
+  }
+}

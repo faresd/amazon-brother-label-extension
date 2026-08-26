@@ -1,0 +1,10 @@
+dist/
+*.log
+.DS_Store
+Thumbs.db
+template-build-*/
+address 62mm QR16mm.lbx
+address 62mm vertical order barcode.lbx
+template-preview.bmp
+vertical-order-barcode-preview.bmp
+address 62mm bottom code128.lbx
