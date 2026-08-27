@@ -26,6 +26,15 @@ workflow manually with `auth_only=true`. This verifies the keyless Google trust
 without uploading the package to another item. After Google assigns the new
 item ID, set `CWS_EXTENSION_ID` and enable uploads.
 
+If `google-github-actions/auth` reports `unauthorized_client` because the
+credential is rejected by the provider's attribute condition, update the
+Google Cloud Workload Identity provider condition to allow this repository:
+`assertion.repository == 'faresd/amazon-brother-label-extension'` (or combine
+it with the existing release-branch restriction). The account making that
+change needs permission to read and update Workload Identity pool providers;
+the GitHub deployment service account intentionally does not have that
+administrative permission.
+
 ## Release
 
 Update `manifest.json` and `package.json` to the same version, merge to `main`, and push a matching tag such as `v2.0.15`. CI validates and packages the extension; the release workflow creates GitHub artifacts; the Store workflow uses the immutable release ZIP.
