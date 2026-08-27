@@ -8,3 +8,5 @@ address 62mm vertical order barcode.lbx
 template-preview.bmp
 vertical-order-barcode-preview.bmp
 address 62mm bottom code128.lbx
+address 62mm bottom code128.before-*.lbx
+work/

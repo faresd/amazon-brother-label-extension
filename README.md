@@ -49,6 +49,9 @@ and `WD19DCS` / `WD19S DCS` -> `dcs`). The value remains editable before print.
 
 Version 1.2.0 prints the full normalized account name and a clearer product mark.
 
+Version 2.0.16 aligns the sender QR code to the top edge and keeps the
+account/model shortcut directly below it without overlap.
+
 Version 2.0.15 uses the user's P-touch layout with a standard horizontal Code 128
 barcode across the bottom edge and the Amazon order number printed beneath it.
 
