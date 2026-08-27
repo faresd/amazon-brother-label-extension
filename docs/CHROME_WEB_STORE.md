@@ -1,6 +1,6 @@
 # Chrome Web Store automation
 
-Tagged releases build two deterministic ZIP files and publish a GitHub Release. The release workflow then calls the reusable Store workflow directly, avoiding GitHub's suppression of follow-up events created with `GITHUB_TOKEN`. The Store workflow uploads the Store ZIP with Chrome Web Store API v2 and can submit it for review.
+Tagged releases build two deterministic ZIP files and publish a GitHub Release. The bridge repository's exact trusted publisher workflow downloads and validates the immutable Store ZIP, then uploads it with Chrome Web Store API v2. This keeps Store credentials and publishing trust in one audited workflow.
 
 ## One-time Google/Chrome setup
 
@@ -48,4 +48,4 @@ repository claim is accepted by the Google provider.
 
 ## Release
 
-Update `manifest.json` and `package.json` to the same version, merge to `main`, and push a matching tag such as `v2.0.15`. CI validates and packages the extension; the release workflow creates GitHub artifacts; the Store workflow uses the immutable release ZIP.
+Update `manifest.json` and `package.json` to the same version, merge to `main`, and push a matching tag such as `v2.0.17`. CI validates and packages the extension; the release workflow creates GitHub artifacts; the bridge publisher uses the immutable release ZIP.

@@ -2,7 +2,7 @@
 
 Effective date: August 27, 2026
 
-Amazon Brother Package Label has one purpose: to create an editable 62 mm
+Amazon Brother Package Label BETA has one purpose: to create an editable 62 mm
 package label from the Amazon Seller Central order currently open in the
 browser and print it through the locally installed Brother b-PAC component.
 

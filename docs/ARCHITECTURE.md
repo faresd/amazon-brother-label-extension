@@ -1,6 +1,6 @@
 # Architecture
 
-Amazon Brother Package Label is a Manifest V3 extension with no backend and no remote code.
+Amazon Brother Package Label BETA is a Manifest V3 extension with no backend and no remote code.
 
 1. `parser.js` extracts the visible order ID, purchase date, destination, phone, Amazon account, product shortcut, and quantity from the signed-in Seller Central page.
 2. `content.js` adds the package-label action, presents a review dialog, and maps reviewed values to named P-touch template objects.

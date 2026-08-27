@@ -1,4 +1,6 @@
-# Amazon Brother Package Label
+# Amazon Brother Package Label BETA
+
+> THIS EXTENSION IS FOR BETA TESTING.
 
 Version 2 prints through Brother b-PAC and the existing P-touch template. This preserves the 62 mm continuous roll and Automatic Length instead of forcing the job through the browser's fixed page sizes.
 
@@ -52,7 +54,7 @@ and `WD19DCS` / `WD19S DCS` -> `dcs`). The value remains editable before print.
 
 Version 1.2.0 prints the full normalized account name and a clearer product mark.
 
-Version 2.0.16 aligns the sender QR code to the top edge and keeps the
+Version 2.0.17 is the Store beta build. It aligns the sender QR code to the top edge and keeps the
 account/model shortcut directly below it without overlap.
 
 Version 2.0.15 uses the user's P-touch layout with a standard horizontal Code 128
