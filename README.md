@@ -27,6 +27,9 @@ once, and click **Print package label** near the order heading.
 
 The extension requests access only to Amazon.fr order-detail pages. It does not send or retain customer delivery data.
 
+See [PRIVACY.md](PRIVACY.md) for the complete privacy policy and permission
+explanations used by the Chrome Web Store listing.
+
 ## First print
 
 In Chrome print preview select:
@@ -92,6 +95,9 @@ GitHub Actions validates every change and attaches local-install and Chrome Web
 Store ZIP files to version tags. Chrome Web Store API v2 publishing uses
 keyless Google Workload Identity Federation. See
 [docs/CHROME_WEB_STORE.md](docs/CHROME_WEB_STORE.md).
+
+The Store listing assets, privacy declarations, and production item ID are
+versioned in [store-assets/README.md](store-assets/README.md).
 
 ## Notes
 

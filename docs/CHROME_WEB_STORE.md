@@ -9,6 +9,10 @@ Tagged releases build two deterministic ZIP files and publish a GitHub Release. 
 3. Configure GitHub Actions Workload Identity Federation for keyless authentication to that service account.
 4. Create the initial Chrome Web Store item manually, complete Store listing, Privacy, Distribution, and test instructions, then publish the first visibility configuration manually when required by Chrome.
 
+The production Store item has been created with ID
+`dpoljkankmaplfhjdhnncemiacomofli`. Reusable listing copy and the exact-size
+artwork are kept in `store-assets/`.
+
 ## GitHub repository variables
 
 - `GCP_PROJECT_ID`
@@ -34,6 +38,13 @@ it with the existing release-branch restriction). The account making that
 change needs permission to read and update Workload Identity pool providers;
 the GitHub deployment service account intentionally does not have that
 administrative permission.
+
+The production publisher currently authenticates Brother extension releases
+through the bridge repository's approved Workload Identity trust. Its
+`publish-label-extension.yml` workflow downloads the immutable Store ZIP from
+this repository and publishes item `dpoljkankmaplfhjdhnncemiacomofli`. The
+extension repository's direct uploader remains disabled until its own
+repository claim is accepted by the Google provider.
 
 ## Release
 

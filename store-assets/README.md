@@ -1,0 +1,69 @@
+# Chrome Web Store listing
+
+Permanent item ID: `dpoljkankmaplfhjdhnncemiacomofli`
+
+## Product details
+
+- Category: Workflow & Planning
+- Language: English
+- Homepage: `https://github.com/faresd/amazon-brother-label-extension`
+- Support: `https://github.com/faresd/amazon-brother-label-extension/issues`
+
+Description:
+
+> Print 62 mm continuous-length package labels directly from Amazon Seller
+> Central order pages using Brother b-PAC and an editable P-touch template.
+>
+> The extension reads the delivery address, Amazon order number, order date,
+> account name, product model, and quantity visible on the current order page.
+> It opens a preview where missing or masked values can be corrected before
+> printing.
+>
+> Labels include a recipient block, sender QR code, account/model shortcut,
+> order date, and a Code 128 barcode for the Amazon order number. The label
+> length follows the content while preserving the 62 mm roll width.
+>
+> Requirements: Windows with Brother b-PAC Client Component, the Brother b-PAC
+> browser extension, a compatible Brother QL printer with a 62 mm continuous
+> roll, and the supplied P-touch template.
+>
+> Privacy: customer and sender information stays on the local computer. The
+> extension does not transmit or retain order data, and QR generation runs
+> locally.
+
+## Assets
+
+- `store-icon-128.png`: required 128 x 128 Store icon.
+- `screenshot-1280x800.png`: required screenshot using fictional test data.
+- `small-promo-440x280.png`: optional small promotional tile.
+
+The generated artwork is original, contains no third-party logos, and does not
+contain real customer, sender, or order information.
+
+## Privacy declarations
+
+Single purpose:
+
+> Print an editable 62 mm package label from the Amazon Seller Central order
+> currently open in the browser through the locally installed Brother b-PAC
+> printing component.
+
+Permission justification:
+
+- `storage`: saves optional sender QR text and local label preferences in the
+  browser profile.
+- `https://sellercentral.amazon.fr/orders-v3/order/*`: reads the visible order
+  details required to populate the label on the user-selected order page.
+
+The extension does not sell data, use data for advertising or credit purposes,
+or transfer order data to external servers. It does not use remote code.
+
+## Reviewer test instructions
+
+No shared Amazon credentials are provided because the extension operates on
+Amazon.fr Seller Central order pages through the reviewer's own authenticated
+session. Testing the complete print flow requires Windows, Brother b-PAC Client
+Component, the Brother b-PAC browser extension, a compatible Brother QL
+printer, and a 62 mm continuous roll. Open an order detail page, click **Create
+package label**, verify the preview, and print. The options page can be opened
+without an Amazon login to inspect the local sender QR settings.
