@@ -10,7 +10,8 @@ Tagged releases build two deterministic ZIP files and publish a GitHub Release. 
 4. Create the initial Chrome Web Store item manually, complete Store listing, Privacy, Distribution, and test instructions, then publish the first visibility configuration manually when required by Chrome.
 
 The production Store item has been created with ID
-`dpoljkankmaplfhjdhnncemiacomofli`. Reusable listing copy and the exact-size
+`cjcpkepjaohailehapclenmiplfbckbp`, owned by the `cheaply.fr` publisher
+(`834b08cc-f204-46e3-b7d0-d914b36c2504`). Reusable listing copy and the exact-size
 artwork are kept in `store-assets/`.
 
 ## GitHub repository variables
@@ -42,7 +43,7 @@ administrative permission.
 The production publisher currently authenticates Brother extension releases
 through the bridge repository's approved Workload Identity trust. Its
 `publish-label-extension.yml` workflow downloads the immutable Store ZIP from
-this repository and publishes item `dpoljkankmaplfhjdhnncemiacomofli`. The
+this repository and publishes item `cjcpkepjaohailehapclenmiplfbckbp`. The
 extension repository's direct uploader remains disabled until its own
 repository claim is accepted by the Google provider.
 

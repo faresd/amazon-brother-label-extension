@@ -1,6 +1,8 @@
 # Chrome Web Store listing
 
-Permanent item ID: `dpoljkankmaplfhjdhnncemiacomofli`
+Permanent item ID: `cjcpkepjaohailehapclenmiplfbckbp`
+
+Publisher: `cheaply.fr` (`834b08cc-f204-46e3-b7d0-d914b36c2504`)
 
 ## Product details
 
