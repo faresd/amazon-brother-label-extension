@@ -107,9 +107,19 @@
     const lines = normalizedLines(text).filter(Boolean);
     const orderHeading = lines.findIndex((line) => /order details|détails de la commande/i.test(line));
     const headerLines = lines.slice(0, orderHeading >= 0 ? orderHeading : 12);
+    const marketplaces = new Set([
+      "france", "united kingdom", "spain", "italy", "germany", "netherlands",
+      "belgium", "sweden", "poland", "ireland"
+    ]);
+    const marketplaceIndex = headerLines.findIndex((line) => marketplaces.has(line.toLocaleLowerCase()));
+    if (marketplaceIndex > 0) {
+      const adjacentAccount = headerLines[marketplaceIndex - 1];
+      if (adjacentAccount && !/^amazon$/i.test(adjacentAccount)) return adjacentAccount;
+    }
+
     const ignored = new Set([
       "france", "united kingdom", "spain", "italy", "germany", "en", "fr", "help",
-      "new seller central", "seller central"
+      "new seller central", "seller central", "menu", "products", "workspace"
     ]);
     return headerLines.find((line) => {
       const lower = line.toLocaleLowerCase();

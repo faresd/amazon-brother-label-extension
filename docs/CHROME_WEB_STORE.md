@@ -49,4 +49,4 @@ repository claim is accepted by the Google provider.
 
 ## Release
 
-Update `manifest.json` and `package.json` to the same version, merge to `main`, and push a matching tag such as `v2.0.17`. CI validates and packages the extension; the release workflow creates GitHub artifacts; the bridge publisher uses the immutable release ZIP.
+Update `manifest.json` and `package.json` to the same version, merge to `main`, and push a matching tag such as `v2.0.18`. CI validates and packages the extension; the release workflow creates GitHub artifacts; the bridge publisher uses the immutable release ZIP.

@@ -1746,6 +1746,13 @@ var _BrotherSDK = class _BrotherSDK {
     return printers;
   }
   static async printerIsReady(timeout = 2e3) {
+    // Amazon Seller Central can replace its body during SPA navigation. The
+    // Brother extension marks the current body, while the SDK's original
+    // MutationObserver may still be attached to the discarded body. Re-check
+    // the live marker on every operation so the SDK can recover reliably.
+    if (document.body?.classList.contains("bpac-extension-installed")) {
+      __privateSet(_BrotherSDK, _ready, true);
+    }
     if (__privateGet(_BrotherSDK, _ready)) {
       return;
     }

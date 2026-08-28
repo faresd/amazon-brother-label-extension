@@ -37,3 +37,29 @@ Quantity: 4
 test("uses four model characters and omits x1", () => {
   assert.equal(parser.productLabelWithQuantity("Lenovo 40AF0135EU dock", 1), "lenovo 40af");
 });
+
+test("uses the account beside the marketplace instead of the navigation menu", () => {
+  const result = parser.parse(`
+Menu
+Products
+Workspace
+Amazon
+CHRecycle
+Spain
+Account health
+Order details
+Order ID: # 402-4074345-2436318
+Purchase date: Fri, 28 Aug 2026, 17:41 MEST
+Ship to
+Buyer Name
+1 Example Street
+75001 Paris
+France
+Order contents
+Dell WD19DCS dock
+ASIN: B08XNHD4TQ
+Quantity: 1
+`);
+  assert.equal(result.accountName, "CHRecycle");
+  assert.equal(result.accountLabel, "chrecycle");
+});

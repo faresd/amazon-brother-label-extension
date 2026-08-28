@@ -6,7 +6,7 @@ const dist = new URL("dist/", root);
 const manifest = JSON.parse(await readFile(new URL("manifest.json", root), "utf8"));
 
 const extensionFiles = [
-  "manifest.json", "service-worker.js", "content.js", "content.css", "parser.js",
+  "manifest.json", "service-worker.js", "content.js", "content.css", "parser.js", "printer-selector.js",
   "options.html", "options.js", "options.css", "print.html", "print.js", "print.css",
   "bpac-sdk.js", "BPAC_JS_LICENSE.txt", "qrcode.js", "qrcode_UTF8.js",
   "THIRD_PARTY_NOTICES.txt", "logo.bmp", "address-62mm-bottom-code128.lbx"

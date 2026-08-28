@@ -45,6 +45,11 @@ In Chrome print preview select:
 
 Chrome normally remembers the last printer settings.
 
+Version 2.0.18 automatically selects an online replacement printer with the
+same Brother model, recovers when Seller Central replaces the b-PAC page
+bridge, and ignores navigation labels such as `Menu` when reading the Amazon
+account name.
+
 Version 1.0.3 compensates for the QL-700 driver's print-preview scaling so the
 label fills the 62 × 90 mm page while Chrome remains set to 100%.
 

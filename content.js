@@ -5,8 +5,34 @@
   const BACKDROP_ID = "cheaply-label-backdrop";
   let brotherModulePromise;
 
+  function waitForBrotherBridge(timeout = 8000) {
+    if (document.body?.classList.contains("bpac-extension-installed")) return Promise.resolve();
+
+    return new Promise((resolve, reject) => {
+      const observer = new MutationObserver(() => {
+        if (!document.body?.classList.contains("bpac-extension-installed")) return;
+        clearTimeout(timer);
+        observer.disconnect();
+        resolve();
+      });
+      const timer = setTimeout(() => {
+        observer.disconnect();
+        reject(new Error("Brother b-PAC browser bridge did not become ready. Reload the Amazon page and verify that the Brother b-PAC extension is enabled."));
+      }, timeout);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+        childList: true,
+        subtree: true
+      });
+    });
+  }
+
   function loadBrotherSdk() {
-    brotherModulePromise ||= import(chrome.runtime.getURL("bpac-sdk.js"));
+    brotherModulePromise ||= (async () => {
+      await waitForBrotherBridge();
+      return import(chrome.runtime.getURL("bpac-sdk.js"));
+    })();
     return brotherModulePromise;
   }
 
@@ -26,34 +52,34 @@
     };
   }
 
-  async function brotherPrinter(settings) {
+  async function brotherPrinter(settings, printerName = settings.printerName) {
     const { default: BrotherSDK } = await loadBrotherSdk();
     return new BrotherSDK({
       templatePath: settings.templatePath,
-      printer: settings.printerName,
+      printer: printerName,
       media: "62mm"
     });
   }
 
-  async function checkBrotherSetup(job, settings) {
+  async function resolveBrotherPrinter(settings) {
     const { default: BrotherSDK } = await loadBrotherSdk();
-    // Constructing an instance initializes the DOM bridge installed by Brother.
-    const printer = await brotherPrinter(settings);
     const printers = await BrotherSDK.getPrinterList();
-    if (!printers.includes(settings.printerName)) {
-      throw new Error(`${settings.printerName} is not available in Brother b-PAC.`);
-    }
-    const printerStatus = await printer.getPrinterStatus();
+    const instances = new Map();
+    const selected = await globalThis.CheaplyPrinterSelector.selectPrinter(
+      printers,
+      settings.printerName,
+      async (printerName) => {
+        const printer = await brotherPrinter(settings, printerName);
+        instances.set(printerName, printer);
+        return printer.getPrinterStatus();
+      }
+    );
+    return { printer: instances.get(selected.printerName), printerStatus: selected.status, printers };
+  }
+
+  async function checkBrotherSetup(job, settings) {
+    const { printer, printerStatus, printers } = await resolveBrotherPrinter(settings);
     console.info("[Brother label] b-PAC status", JSON.stringify({ printers, printerStatus }));
-    if (printerStatus.supported === false) {
-      throw new Error(`${printerStatus.printerName || settings.printerName} is not supported by Brother b-PAC.`);
-    }
-    if (printerStatus.online === false) {
-      throw new Error(`${printerStatus.printerName || settings.printerName} is offline.`);
-    }
-    if (printerStatus.errorCode && printerStatus.errorCode !== 0) {
-      throw new Error(printerStatus.errorString || `Brother printer error ${printerStatus.errorCode}.`);
-    }
     if (printerStatus.documentMedia !== "62mm") {
       throw new Error(`Brother did not select the 62 mm continuous document format (selected: ${printerStatus.documentMedia || "unknown"}).`);
     }
@@ -63,7 +89,7 @@
   }
 
   async function printOneLabel(job, settings) {
-    const printer = await brotherPrinter(settings);
+    const { printer } = await resolveBrotherPrinter(settings);
     return printer.print(templateData(job), {
       copies: 1,
       printName: job.orderId ? `Amazon ${job.orderId}` : "Amazon package label",
