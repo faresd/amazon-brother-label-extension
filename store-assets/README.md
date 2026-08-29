@@ -13,8 +13,8 @@ Publisher: `cheaply.fr` (`834b08cc-f204-46e3-b7d0-d914b36c2504`)
 
 Description:
 
-> Print 62 mm continuous-length package labels directly from Amazon Seller
-> Central order pages using Brother b-PAC and an editable P-touch template.
+> Print 62 mm continuous-length package labels from Amazon Seller Central or
+> the Chlabs Shopify order action using Brother b-PAC and an editable P-touch template.
 >
 > The extension reads the delivery address, Amazon order number, order date,
 > account name, product model, and quantity visible on the current order page.
@@ -29,9 +29,9 @@ Description:
 > browser extension, a compatible Brother QL printer with a 62 mm continuous
 > roll, and the supplied P-touch template.
 >
-> Privacy: customer and sender information stays on the local computer. The
-> extension does not transmit or retain order data, and QR generation runs
-> locally.
+> Privacy: Amazon order data and sender QR information stay on the local
+> computer. Shopify print data uses an encrypted two-minute, single-use Chlabs
+> API handoff and is not retained after printing. QR generation runs locally.
 
 ## Assets
 
@@ -46,9 +46,9 @@ contain real customer, sender, or order information.
 
 Single purpose:
 
-> Print an editable 62 mm package label from the Amazon Seller Central order
-> currently open in the browser through the locally installed Brother b-PAC
-> printing component.
+> Print an editable 62 mm package label from the current Amazon Seller Central
+> order or a user-reviewed Chlabs Shopify order through the locally installed
+> Brother b-PAC printing component.
 
 Permission justification:
 
@@ -56,9 +56,13 @@ Permission justification:
   browser profile.
 - `https://sellercentral.amazon.fr/orders-v3/order/*`: reads the visible order
   details required to populate the label on the user-selected order page.
+- The exact Chlabs `/shopify/brother-print` route consumes a random, two-minute,
+  single-use print handoff created by the authenticated Shopify app.
 
-The extension does not sell data, use data for advertising or credit purposes,
-or transfer order data to external servers. It does not use remote code.
+The extension does not sell data or use data for advertising or credit
+purposes. Amazon order data and sender QR data are never transferred. Shopify
+print data is encrypted by the Chlabs API and expires after two minutes. The
+extension does not use remote code.
 
 ## Reviewer test instructions
 

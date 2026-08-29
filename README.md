@@ -12,7 +12,7 @@ Required local components:
 
 The label dialog includes **Check printer setup**, which renders the populated template without sending a physical print. **Print one label** sends exactly one copy with automatic cutting.
 
-An internal Chrome extension that reads the visible delivery information from an Amazon Seller Central order, reproduces the existing 62 mm P-touch label, and opens Chrome print preview for a Brother QL-700.
+An internal Chrome extension that reads the visible delivery information from an Amazon Seller Central order or consumes an authenticated Shopify print handoff, then reproduces the existing 62 mm P-touch label through Brother b-PAC.
 
 ## Install
 
@@ -27,7 +27,7 @@ The Windows setup package installs the template at:
 After installation, open an Amazon.fr Seller Central order page, refresh it
 once, and click **Print package label** near the order heading.
 
-The extension requests access only to Amazon.fr order-detail pages. It does not send or retain customer delivery data.
+The extension requests access only to Amazon.fr order-detail pages and the exact Chlabs Shopify print-handoff route. Shopify customer data is encrypted by the backend, available for two minutes and consumed exactly once; the browser extension does not retain it. The profile-local sender QR value never leaves the computer.
 
 See [PRIVACY.md](PRIVACY.md) for the complete privacy policy and permission
 explanations used by the Chrome Web Store listing.
@@ -49,6 +49,8 @@ Version 2.0.18 automatically selects an online replacement printer with the
 same Brother model, recovers when Seller Central replaces the b-PAC page
 bridge, and ignores navigation labels such as `Menu` when reading the Amazon
 account name.
+
+Version 2.0.19 adds Shopify order printing through a separated frontend/API/local-extension architecture. The Shopify app reviews the destination, telephone, order creation date, account, four-character model shortcut, quantity and Code 128 order number. The extension consumes only a two-minute, single-use handoff and keeps all Brother settings and sender QR data local to the Brave profile.
 
 Version 1.0.3 compensates for the QL-700 driver's print-preview scaling so the
 label fills the 62 × 90 mm page while Chrome remains set to 100%.

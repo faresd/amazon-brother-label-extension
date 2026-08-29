@@ -4,12 +4,13 @@ Effective date: August 27, 2026
 
 Amazon Brother Package Label BETA has one purpose: to create an editable 62 mm
 package label from the Amazon Seller Central order currently open in the
-browser and print it through the locally installed Brother b-PAC component.
+browser or from a user-reviewed Shopify order, and print it through the locally
+installed Brother b-PAC component.
 
 ## Data handled
 
 To populate a label, the extension reads only the information visible on the
-current Amazon Seller Central order page. This can include the recipient name,
+current Amazon Seller Central order page or a two-minute Shopify print handoff. This can include the recipient name,
 postal address, telephone number, Amazon order number, order date, product
 model, quantity, and seller account name.
 
@@ -19,12 +20,17 @@ recipient or order details after the current label workflow ends.
 
 ## Data use and transfer
 
-Order and sender information is processed locally on the user's computer for
-previewing and printing the requested label. QR generation also runs locally.
+Amazon order and sender information is processed locally on the user's computer
+for previewing and printing. For Shopify, the authenticated Shopify app sends
+the reviewed label fields to the Chlabs API. They are encrypted at rest, expire
+after two minutes and can be consumed only once by the local extension. The URL
+contains only a random token, never customer data. QR generation and optional
+sender QR text remain local and are not sent through this API.
 
 The extension does not:
 
-- transmit order or sender data to the developer or to external servers;
+- transmit Amazon order data or sender QR data to the developer or external servers;
+- retain Shopify customer data after the short-lived print handoff;
 - sell or transfer user data to third parties;
 - use data for advertising, analytics, profiling, creditworthiness, or lending;
 - use data for a purpose unrelated to printing the requested package label; or
@@ -41,6 +47,8 @@ to the user's printer.
 - Access to `https://sellercentral.amazon.fr/orders-v3/order/*` lets the
   extension read the visible order details needed to populate a label on the
   user-selected order page.
+- Access to the exact Chlabs `/shopify/brother-print` route lets the extension
+  consume the user-requested, encrypted, single-use Shopify print handoff.
 
 ## Contact
 

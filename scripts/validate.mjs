@@ -9,17 +9,18 @@ const pkg = JSON.parse(await readFile(new URL("package.json", root), "utf8"));
 assert.equal(manifest.manifest_version, 3);
 assert.equal(manifest.version, pkg.version, "manifest and package versions must match");
 assert.deepEqual(manifest.permissions, ["storage"]);
-assert.ok(manifest.host_permissions.every((value) => value.startsWith("https://sellercentral.amazon.fr/")));
+assert.ok(manifest.host_permissions.includes("https://sellercentral.amazon.fr/orders-v3/order/*"));
+assert.ok(manifest.host_permissions.includes("https://amazon-chronopost-direct-api-ajz3qng24a-od.a.run.app/shopify/brother-print*"));
 
 const required = [
-  "manifest.json", "service-worker.js", "content.js", "content.css", "parser.js", "printer-selector.js",
+  "manifest.json", "service-worker.js", "content.js", "content.css", "parser.js", "printer-selector.js", "shopify-handoff.js",
   "options.html", "options.js", "options.css", "bpac-sdk.js",
   "template-source/final/label.xml", "template-source/final/prop.xml",
   "template-source/final/Object0.bmp", "BPAC_JS_LICENSE.txt", "THIRD_PARTY_NOTICES.txt"
 ];
 for (const file of required) assert.ok((await stat(new URL(file, root))).isFile(), `missing ${file}`);
 
-const sourceFiles = ["manifest.json", "service-worker.js", "options.js", "content.js", "parser.js", "printer-selector.js", "README.md"];
+const sourceFiles = ["manifest.json", "service-worker.js", "options.js", "content.js", "parser.js", "printer-selector.js", "shopify-handoff.js", "README.md"];
 const source = (await Promise.all(sourceFiles.map((file) => readFile(new URL(file, root), "utf8")))).join("\n");
 assert.ok(!source.includes("C:\\\\Users\\\\frees") && !source.includes("C:\\Users\\frees"), "release source contains a user-specific Windows path");
 assert.ok(!/4 rue de broglie|33662775987/i.test(source), "release source contains private sender details");
