@@ -1,6 +1,51 @@
 {
   "manifest_version": 3,
   "name": "Amazon Brother Package Label BETA",
+  "version": "2.0.21",
+  "description": "THIS EXTENSION IS FOR BETA TESTING. Prints 62 mm Amazon Seller Central package labels through Brother b-PAC.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://sellercentral.amazon.fr/orders-v3/order/*",
+    "https://chlabs-brother-label-api-ajz3qng24a-od.a.run.app/shopify/brother-print*",
+    "https://amazon-chronopost-direct-api-ajz3qng24a-od.a.run.app/shopify/brother-print*"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_title": "Package label settings"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["bpac-sdk.js"],
+      "matches": [
+        "https://sellercentral.amazon.fr/*",
+        "https://chlabs-brother-label-api-ajz3qng24a-od.a.run.app/*",
+        "https://amazon-chronopost-direct-api-ajz3qng24a-od.a.run.app/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://sellercentral.amazon.fr/*"],
+      "js": ["parser.js", "printer-selector.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://chlabs-brother-label-api-ajz3qng24a-od.a.run.app/shopify/brother-print*",
+        "https://amazon-chronopost-direct-api-ajz3qng24a-od.a.run.app/shopify/brother-print*"
+      ],
+      "js": ["printer-selector.js", "shopify-handoff.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
+{
+  "manifest_version": 3,
+  "name": "Amazon Brother Package Label BETA",
   "version": "2.0.19",
   "description": "THIS EXTENSION IS FOR BETA TESTING. Prints 62 mm Amazon Seller Central package labels through Brother b-PAC.",
   "permissions": ["storage"],
