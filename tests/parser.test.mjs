@@ -65,6 +65,24 @@ Quantity: 1
   assert.equal(result.accountLabel, "chrecycle");
 });
 
+test("uses the account beside a localized marketplace in the refreshed navigation", () => {
+  const result = parser.parse(`
+Menu
+Mon entreprise
+Produits
+Espace de travail
+Amazon
+CHRecycle
+Espagne
+État du compte
+Détails de la commande
+Numéro de la commande : # 402-8112978-0376315
+Date d'achat: jeu. 3 sept. 2026, 17:20 MEST
+`);
+  assert.equal(result.accountName, "CHRecycle");
+  assert.equal(result.accountLabel, "chrecycle");
+});
+
 test("supports Amazon's refreshed order layout and ignores invoice metadata", () => {
   const result = parser.parse(`
 CHRecycle
