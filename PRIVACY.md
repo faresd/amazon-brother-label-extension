@@ -44,7 +44,8 @@ to the user's printer.
 
 - `storage` saves optional sender QR text and label preferences in the local
   browser profile.
-- Access to `https://sellercentral.amazon.fr/orders-v3/order/*` lets the
+- Access to the official Amazon Seller Central order-detail URLs in North
+  America, Europe, the Middle East, Africa, India, and the Far East lets the
   extension read the visible order details needed to populate a label on the
   user-selected order page.
 - Access to the exact Chlabs `/shopify/brother-print` route lets the extension
