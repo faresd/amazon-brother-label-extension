@@ -123,8 +123,11 @@
     const orderHeading = lines.findIndex((line) => /order details|détails de la commande/i.test(line));
     const headerLines = lines.slice(0, orderHeading >= 0 ? orderHeading : 12);
     const marketplaces = new Set([
-      "france", "united kingdom", "spain", "italy", "germany", "netherlands",
-      "belgium", "sweden", "poland", "ireland"
+      "france", "united kingdom", "royaume-uni", "spain", "espagne", "españa",
+      "italy", "italie", "italia", "germany", "allemagne", "deutschland",
+      "netherlands", "pays-bas", "nederland", "belgium", "belgique", "belgië",
+      "sweden", "suède", "sverige", "poland", "pologne", "polska", "ireland",
+      "irlande", "éire"
     ]);
     const marketplaceIndex = headerLines.findIndex((line) => marketplaces.has(line.toLocaleLowerCase()));
     if (marketplaceIndex > 0) {
@@ -134,7 +137,9 @@
 
     const ignored = new Set([
       "france", "united kingdom", "spain", "italy", "germany", "en", "fr", "help",
-      "new seller central", "seller central", "menu", "products", "workspace"
+      "new seller central", "seller central", "menu", "products", "produits",
+      "productos", "produkte", "prodotti", "workspace", "espace de travail",
+      "arbeitsbereich", "area di lavoro", "mon entreprise", "my business"
     ]);
     return headerLines.find((line) => {
       const lower = line.toLocaleLowerCase();
