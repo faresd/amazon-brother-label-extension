@@ -121,7 +121,8 @@
   }
 
   function isOrderPage() {
-    return /^\/orders-v3\/order\/[^/?#]+\/?$/.test(location.pathname);
+    const route = `${location.pathname}${location.search}`;
+    return /order/i.test(location.pathname) && /\b[0-9]{3}-[0-9]{7}-[0-9]{7}\b/.test(decodeURIComponent(route));
   }
 
   function syncButton() {
@@ -135,7 +136,7 @@
 
   async function openDialog() {
     document.getElementById(BACKDROP_ID)?.remove();
-    const parsed = globalThis.CheaplyLabelParser.parse(document.body.innerText);
+    const parsed = globalThis.CheaplyLabelParser.parse(document.body.innerText, undefined, location.href);
     const settings = await chrome.runtime.sendMessage({ type: "GET_SETTINGS" });
     const fallbackChannel = String(settings.channel || "").split(/\r?\n/);
     const automaticAccount = parsed.accountLabel || fallbackChannel[0] || "";
@@ -168,7 +169,7 @@
         <label for="cl-product-label">Object shortcut</label>
         <input id="cl-product-label" value="${escapeHtml(automaticProduct)}" title="${escapeHtml(parsed.productName)}">
         <label for="cl-order">Order ID</label>
-        <input id="cl-order" value="${escapeHtml(parsed.orderId)}" readonly>
+        <input id="cl-order" value="${escapeHtml(parsed.orderId)}" maxlength="64" placeholder="Amazon order number">
         <label for="cl-qr">QR sender details</label>
         <input id="cl-qr" value="${escapeHtml(settings.qrText || "")}" placeholder="Leave empty to omit the QR code">
         <div class="cl-actions">
@@ -199,7 +200,7 @@
           backdrop.querySelector("#cl-product-label").value.trim()
         ].filter(Boolean).join("\n"),
         qrText: backdrop.querySelector("#cl-qr").value.trim(),
-        orderId: parsed.orderId,
+        orderId: backdrop.querySelector("#cl-order").value.trim(),
         sellerOrderId: parsed.sellerOrderId
       };
     }
